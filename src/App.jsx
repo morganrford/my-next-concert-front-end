@@ -5,6 +5,7 @@ import ConcertDetail from './components/ConcertDetail/ConcertDetail'
 import ConcertForm from './components/ConcertForm/ConcertForm'
 import ConcertList from './components/ConcertList/ConcertList'
 import * as concertService from "./services/concertService"
+import BandsForm from './components/BandsForm/BandsForm'
 
 const App = () => {
 
@@ -91,6 +92,7 @@ const App = () => {
       <h1>My Next Concert</h1>
       <ConcertDetail />
       <ConcertForm />
+      <BandsForm />
       <ConcertList />
     </>
   )
