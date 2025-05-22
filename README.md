@@ -1,12 +1,42 @@
-# React + Vite
+# My Next Concert
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Logo](/src/assets/mynextconcert.png)
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Link to deployed app](Link)
 
-## Expanding the ESLint configuration
+[Link to planning materials](https://trello.com/b/OFQoujzu/my-next-concert)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[Link to back end repo](https://github.com/morganrford/my-next-concert-back-end)
+
+## Attributions
+
+### Resources
+
+[Contrast Checker](https://webaim.org/resources/contrastchecker/)
+
+### Assets
+
+[Link](Link)
+
+## Technologies Used
+
+* Mongoose
+* Express
+* React
+* Node.js
+* HTML
+* CSS
+
+# Stretch goals
+
+* The user would be able to click on the venue and see more information about it such as Google Maps for directions, parking information, will call, etc.
+* The user would be able to view a page with more information about a band, and be able to listen to some of their songs within the page.
+* The details for the show would be directly on the concert poster, and users would be able to interact with the poster itself.
+* Users would be able to browse concerts and filter them by location, genre, etc.
+* Users would be able to use a search bar to look for certain concerts or bands.
+* Users would be able to save concerts they want to go to, and view it in a list. 
+* The user would be able to change their username and password.
+* Users would be able to view a page for a certain promoter and see all of their shows listed on that page.
+* Users would be able to upload their show poster directly to the website instead of through a third party.
