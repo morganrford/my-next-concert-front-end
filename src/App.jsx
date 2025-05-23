@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router';
 import './App.css'
 import NavBar from './components/NavBar/NavBar'
 import ConcertDetail from './components/ConcertDetail/ConcertDetail'
@@ -6,6 +7,8 @@ import ConcertForm from './components/ConcertForm/ConcertForm'
 import ConcertList from './components/ConcertList/ConcertList'
 import * as concertService from "./services/concertService"
 import BandsForm from './components/BandsForm/BandsForm'
+import SignUpForm from './components/SignUpForm/SignUpForm';
+import SignInForm from './components/SignInForm/SignInForm';
 
 const App = () => {
 
@@ -94,6 +97,10 @@ const App = () => {
       <ConcertForm />
       <BandsForm />
       <ConcertList />
+      <Routes>
+        <Route path='/sign-up' element={<SignUpForm />} />
+        <Route path="/sign-in" element={<SignInForm />} />
+      </Routes>
     </>
   )
 }
