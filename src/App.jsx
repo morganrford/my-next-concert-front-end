@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Route,Routes } from 'react-router'
 import './App.css'
 import NavBar from './components/NavBar/NavBar'
 import ConcertDetail from './components/ConcertDetail/ConcertDetail'
@@ -86,10 +87,20 @@ const App = () => {
       console.log(error)
     }
   }
+
+    const addConcert = (newConcertData) => {
+    newConcertData._id = concerts.length + 1
+    setConcerts([...concerts, newConcertData])
+  }
   return (
     <>
       <NavBar />
       <h1>My Next Concert</h1>
+      <Routes>
+        <Route path = '/' element={<h2> Home Page</h2>} />
+        <Route path = '/concerts/new' element= {<ConcertForm addConcert={addConcert} />} />
+        <Route path='*'  element={<h2>Whoops, nothing to see here!</h2>} />
+      </Routes>
       <ConcertDetail />
       <ConcertForm />
       <BandsForm />

@@ -32,7 +32,7 @@ const BandsForm = (props) => {
           <input
             id="name"
             name="name"
-            value={formData.name}
+            value={formData.bandName}
             onChange={handleChange}
             required
           />
