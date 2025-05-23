@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router';
 import './App.css'
+import './index.css'
 import NavBar from './components/NavBar/NavBar'
 import ConcertDetail from './components/ConcertDetail/ConcertDetail'
 import ConcertForm from './components/ConcertForm/ConcertForm'
