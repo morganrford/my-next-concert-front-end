@@ -15,9 +15,10 @@ const NavBar = () => {
   return (
     <nav>
       <ul>
-        <li>Browse</li>
-        <li>New Show</li>
-        <li>Your Shows</li>
+                <li><Link to='/'>Home</Link></li>
+                <li><Link to='/concerts/new'>New Concert</Link></li>
+                <li><Link to-='/bands/new'>New Band</Link></li>
+                <li><Link to='/concerts'>Your Concerts</Link></li>
       </ul>
       {user ? (
         <ul>
