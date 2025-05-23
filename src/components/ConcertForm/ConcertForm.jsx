@@ -40,7 +40,7 @@ const ConcertForm = (props) => {
           <input
             id="venue-name"
             name="venue-name"
-            value={formData.name}
+            value={formData.venueName}
             onChange={handleChange}
             required
           />
