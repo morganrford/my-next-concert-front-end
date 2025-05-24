@@ -2,6 +2,8 @@
 
 ![Logo](/src/assets/mynextconcert.png)
 
+My Next Concert is a website for promoters to keep track of their concerts and the bands that will be playing in their shows. Users can upload information about their concerts and bands in their concerts and view, edit and delete them.
+
 ## Getting Started
 
 [Link to deployed app](Link)
@@ -18,7 +20,7 @@
 
 ### Assets
 
-[Link](Link)
+Canva was used to create our assets: [Canva](https://www.canva.com/)
 
 ## Technologies Used
 
