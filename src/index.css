@@ -1,32 +1,83 @@
+html, body, #root, .app {
+  height: 100%;
+}
+
 :root {
   font-family: sans-serif;
   line-height: 2;
-  /* text color */
   color: #D6D5C9; 
-  /* background color */
   background-color: #0A100D;
 }
 
-.text-box {
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  position: relative;
+  background-color: #902923;
+}
+
+.nav-links,
+.nav-user {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.logo {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+input {
   background-color: #D6D5C9;
+  color: #0A100D;
+  border: radius 1px;
+  border-color: #B9BAA3;
 }
 
 a {
-  /* link color */
+
   color: #D6D5C9;
   text-decoration: none;
 }
 a:hover {
-  /* link hover color */
-  color: #A22C29;
+  color: #0A100D;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #0A100D;
 }
 
 h1 {
@@ -34,17 +85,36 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  color: #D6D5C9;
+  border-radius: 2px;
   border: 1px solid #D6D5C9;
-  padding: 0.6em 1.2em;
+  padding: 5px;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #A22C29;
+  background-color: #902923;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #B9BAA3;
+  background-color: #A22C29;
+}
+
+button:active {
+  background-color: #0A100D;
+  border-color: #A22C29;
+}
+
+.footer{
   background-color: #902923;
+  color: #D6D5C9;
+  text-align: center;
+  margin-top: auto;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { signUp } from '../../services/authService';
 import { UserContext } from '../../contexts/UserContext';
 
+
 const SignUpForm = () => {
   const navigate = useNavigate();
    const { setUser } = useContext(UserContext);
@@ -43,9 +44,10 @@ const SignUpForm = () => {
       <h1>Sign Up</h1>
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='username'>Username:</label>
+        <div           className='text-box'>
+          <label htmlFor='username' >Username:</label>
           <input
+
             type='text'
             id='name'
             value={username}

@@ -10,6 +10,7 @@ import * as concertService from "./services/concertService"
 import BandsForm from './components/BandsForm/BandsForm'
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
+import Footer from './components/Footer/Footer';
 
 const App = () => {
 
@@ -30,7 +31,7 @@ const App = () => {
       }
     }
     fetchConcerts();
-  })
+  }, [])
 
   const handleSelect = (concert) => {
     setSelected(concert);
@@ -96,8 +97,10 @@ const App = () => {
     setConcerts([...concerts, newConcertData])
   }
   return (
-    <>
+    <div className='app'>
       <NavBar />
+
+      <div className='content'>
       <h1>My Next Concert</h1>
       <Routes>
         <Route path = '/' element={<h2> Home Page</h2>} />
@@ -112,7 +115,10 @@ const App = () => {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path="/sign-in" element={<SignInForm />} />
       </Routes>
-    </>
+    </div>
+          <Footer />
+    </div>
+
   )
 }
 
