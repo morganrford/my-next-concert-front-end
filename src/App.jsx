@@ -15,6 +15,7 @@ import SignInForm from "./components/SignInForm/SignInForm";
 import BandsList from "./components/BandsList/BandsList";
 import BandDetail from "./components/BandDetail/BandDetail";
 import { useNavigate } from 'react-router'
+import Footer from './components/Footer/Footer';
 
 const App = () => {
   const [concerts, setConcerts] = useState([]);
@@ -191,9 +192,11 @@ const App = () => {
   // };
 
   return (
-    <>
+    <div className='app'>
       <NavBar />
 
+      <div className='content'>
+      <h1>My Next Concert</h1>
       <Routes>
         <Route path="/sign-up" element={<SignUpForm />} />
         <Route path="/sign-in" element={<SignInForm />} />
@@ -269,8 +272,11 @@ const App = () => {
 
         <Route path="*" element={<h2>Whoops, nothing to see here!</h2>} />
       </Routes>
-    </>
-  );
-};
+    </div>
+          <Footer />
+    </div>
+
+  )
+}
 
 export default App;
