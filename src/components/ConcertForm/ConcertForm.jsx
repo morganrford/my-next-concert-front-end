@@ -12,7 +12,7 @@ const ConcertForm = (props) => {
     bands: "",
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState(
     props.selected ? props.selected : initialState
@@ -23,12 +23,17 @@ const ConcertForm = (props) => {
   };
 
   const handleSubmit = (evt, concertId) => {
-    evt.prevent.default();
+    evt.preventDefault();
+    const dataToSubmit = {
+    ...formData,
+    bands: formData.bands.split(",").map((b) => ({ bandName: b.trim() })),
+  };
     if (props.selected) {
-      props.handleUpdateConcert(formData, concertId);
+      props.handleUpdateConcert(dataToSubmit, concertId);
     } else {
-      props.handleAddConcert(formData);
+      props.handleAddConcert(dataToSubmit);
     }
+    navigate("/concerts");
   };
 
   return (
@@ -39,8 +44,8 @@ const ConcertForm = (props) => {
           <label htmlFor="venue-name">Venue Name:</label>
           <input
             id="venue-name"
-            name="venue-name"
-            value={formData.venueName}
+            name="venueName"
+            value={formData.name}
             onChange={handleChange}
             required
           />
@@ -49,8 +54,8 @@ const ConcertForm = (props) => {
           <label htmlFor="venue-address">Venue Address:</label>
           <input
             id="venue-address"
-            name="venue-address"
-            value={formData.venueAddress}
+            name="venueAddress"
+            value={formData.address}
             onChange={handleChange}
             required
           />
@@ -101,16 +106,21 @@ const ConcertForm = (props) => {
         </div>
 
         <div>
-          <label htmlFor="bands">Bands:</label>
+          <label htmlFor="bands">Bands (comma separated):</label>
           <input
-            id="bands"
+            type="text"
             name="bands"
             value={formData.bands}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, bands: e.target.value })
+            }
+            placeholder="Nirvana, Foo Fighters, Soundgarden"
             required
           />
         </div>
-        <button type="submit">{props.selected ? "Update Concert" : "Add New Concert"}</button>
+        <button type="submit">
+          Add New Concert
+        </button>
       </form>
     </div>
   );

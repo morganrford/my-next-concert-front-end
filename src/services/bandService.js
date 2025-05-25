@@ -1,4 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/concerts`;
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/bands`;
 
 const index = async () => {
   try {
@@ -24,9 +24,9 @@ const create = async (formData) => {
   }
 };
 
-const update = async (formData, concertId) => {
+const update = async (formData, bandId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${concertId}`, {
+    const res = await fetch(`${BASE_URL}/${bandId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -39,9 +39,9 @@ const update = async (formData, concertId) => {
   }
 };
 
-const deleteConcert = async (concertId) => {
+const deleteBand = async (bandId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${concertId}`, {
+    const res = await fetch(`${BASE_URL}/${bandId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -52,4 +52,4 @@ const deleteConcert = async (concertId) => {
   }
 }
 
-export { index, create, update, deleteConcert };
+export { index, create, update, deleteBand };

@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router';
+
 const BandsForm = (props) => {
   const initialState = {
-    name: "",
+    bandName: "",
     genre: "",
     members: "",
   };
+
+  const navigate = useNavigate();
   // formData state to control the form.
   const [formData, setFormData] = useState(
     props.selected ? props.selected : initialState
@@ -14,6 +18,7 @@ const BandsForm = (props) => {
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
+
   const handleSubmit = (evt, bandId) => {
     evt.preventDefault();
     if (props.selected) {
@@ -21,6 +26,7 @@ const BandsForm = (props) => {
     } else {
       props.handleAddBand(formData);
     }
+    navigate('/bands')
   };
   // And finally, the form itself.
   return (
@@ -28,17 +34,17 @@ const BandsForm = (props) => {
         <h1>Bands Form</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name"> Name </label>
+          <label htmlFor="name"> Band Name: </label>
           <input
             id="name"
-            name="name"
-            value={formData.bandName}
+            name="bandName"
+            value={formData.name}
             onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label htmlFor="genre"> Genre </label>
+          <label htmlFor="genre"> Genre: </label>
           <input
             id="genre"
             name="genre"
@@ -48,7 +54,7 @@ const BandsForm = (props) => {
           />
         </div>
         <div>
-          <label htmlFor="members"> Members </label>
+          <label htmlFor="members"> Members: </label>
           <input
             id="members"
             name="members"
@@ -57,7 +63,8 @@ const BandsForm = (props) => {
           />
         </div>
         <button type="submit">
-          {props.selected ? "Update Band" : "Add New Band"}
+          Add New Band
+          {/* {props.selected ? "Update Band" : "Add New Band"} */}
         </button>
       </form>
     </div>
