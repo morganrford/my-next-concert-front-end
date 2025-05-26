@@ -33,7 +33,7 @@ const BandsForm = (props) => {
     <div>
         <h1>Bands Form</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form">
           <label htmlFor="name"> Band Name: </label>
           <input
             id="name"
@@ -43,7 +43,7 @@ const BandsForm = (props) => {
             required
           />
         </div>
-        <div>
+        <div className="form">
           <label htmlFor="genre"> Genre: </label>
           <input
             id="genre"
@@ -53,7 +53,7 @@ const BandsForm = (props) => {
             required
           />
         </div>
-        <div>
+        <div className="form">
           <label htmlFor="members"> Members: </label>
           <input
             id="members"

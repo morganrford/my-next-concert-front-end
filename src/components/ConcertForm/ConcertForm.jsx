@@ -40,7 +40,7 @@ const ConcertForm = (props) => {
     <div>
       <h1>Concert Form</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form">
           <label htmlFor="venue-name">Venue Name:</label>
           <input
             id="venue-name"
@@ -50,7 +50,7 @@ const ConcertForm = (props) => {
             required
           />
         </div>
-        <div>
+        <div className="form">
           <label htmlFor="venue-address">Venue Address:</label>
           <input
             id="venue-address"
@@ -61,7 +61,7 @@ const ConcertForm = (props) => {
           />
         </div>
 
-        <div>
+        <div className="form">
           <label htmlFor="date">Date:</label>
           <input
             id="date"
@@ -72,7 +72,7 @@ const ConcertForm = (props) => {
           />
         </div>
 
-        <div>
+        <div className="form">
           <label htmlFor="time">Time:</label>
           <input
             id="time"
@@ -83,7 +83,7 @@ const ConcertForm = (props) => {
           />
         </div>
 
-        <div>
+        <div className="form">
           <label htmlFor="price">Price:</label>
           <input
             id="price"
@@ -94,7 +94,7 @@ const ConcertForm = (props) => {
           />
         </div>
 
-        <div>
+        <div className="form">
           <label htmlFor="promoter">Promoter:</label>
           <input
             id="promoter"
@@ -105,7 +105,7 @@ const ConcertForm = (props) => {
           />
         </div>
 
-        <div>
+        <div className="form">
           <label htmlFor="bands">Bands (comma separated):</label>
           <input
             type="text"
