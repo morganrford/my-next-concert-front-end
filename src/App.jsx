@@ -42,7 +42,7 @@ const App = () => {
       }
     };
     fetchConcerts();
-  }, []);
+  }, [concerts]);
 
   const handleSelectConcert = (concert) => {
     setSelectedConcert(concert);
@@ -81,7 +81,7 @@ const App = () => {
         concert._id !== updatedConcert._id ? concert : updatedConcert
       );
       setConcerts(updatedConcertList);
-      setSelected(updatedConcert);
+      setSelectedConcert(updatedConcert);
       setIsFormOpen(false);
     } catch (error) {
       console.log(error);
@@ -120,7 +120,7 @@ const App = () => {
       }
     };
     fetchBands();
-  }, []);
+  }, [bands]);
 
   const handleSelectBand = (band) => {
     setSelectedBand(band);
@@ -130,6 +130,7 @@ const App = () => {
   const handleBandFormView = (band) => {
     if (!band._id) setSelectedBand(null);
     setIsFormOpen(!isFormOpen);
+    
   };
 
   const handleAddBand = async (formData) => {
@@ -159,7 +160,7 @@ const App = () => {
         band._id !== updatedBand._id ? band : updatedBand
       );
       setBands(updatedBandsList);
-      setSelectedBands(updatedBand);
+      setSelectedBand(updatedBand);
       setIsFormOpen(false);
     } catch (error) {
       console.log(error);
@@ -174,22 +175,13 @@ const App = () => {
         throw new Error(deletedBand.error);
       }
       setBands(bands.filter((band) => band._id !== deletedBand._id));
-      setSelectedBands(null);
+      setSelectedBand(null);
       setIsFormOpen(false);
     } catch (error) {
       console.log(error);
     }
     navigate('/bands')
   };
-
-  // const addConcert = (newConcertData) => {
-  //   newConcertData._id = concerts.length + 1;
-  //   setConcerts([...concerts, newConcertData]);
-  // };
-  // const addBand = (newBandData) => {
-  //   newBandData._id = bands.length + 1;
-  //   setBands([...bands, newBandData]);
-  // };
 
   return (
     <div className='app'>
@@ -227,14 +219,7 @@ const App = () => {
 
         <Route
           path="/concerts/:concertId"
-          element={
-            <ConcertDetail
-              selectedConcert={selectedConcert}
-              handleConcertFormView={handleConcertFormView}
-              handleUpdateConcert={handleUpdateConcert}
-              handleDeleteConcert={handleDeleteConcert}
-            />
-          }
+          element = {isFormOpen ? <ConcertForm handleAddConcert={handleAddConcert} selectedConcert={selectedConcert} handleUpdateConcert={handleUpdateConcert}/> : <ConcertDetail selectedConcert={selectedConcert} handleConcertFormView={handleConcertFormView} handleDeleteConcert={handleDeleteConcert}/>}
         />
 
         <Route
@@ -261,13 +246,7 @@ const App = () => {
 
         <Route
           path="/bands/:bandId"
-          element={
-            <BandDetail
-              selectedBand={selectedBand}
-              handleBandFormView={handleBandFormView}
-              handleDeleteBand={handleDeleteBand}
-            />
-          }
+          element = {isFormOpen ? <BandsForm handleAddBand={handleAddBand} selectedBand={selectedBand} handleUpdateBand={handleUpdateBand}/> : <BandDetail selectedBand={selectedBand} handleBandFormView={handleBandFormView} handleDeleteBand={handleDeleteBand}/>}
         />
 
         <Route path="*" element={<h2>Whoops, nothing to see here!</h2>} />

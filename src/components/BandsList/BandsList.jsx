@@ -6,13 +6,13 @@ const BandsList = (props) => {
             <h1>Bands List</h1>
             <div>
                 {!props.bands.length ? (
-                    <h2>No Bands Yet!</h2>
+                     <h2>No Bands Yet! <div>
+            <button type='submit'><Link to="/band/new">Add a Band</Link></button></div></h2>
                 ) : (
                     <ul>
                         {props.bands.map((band) => (
                             <li
                                 key={band._id}
-                                style={ {cursor: 'pointer', color: "#646CFF"}}
                                 onClick={() => props.handleSelectBand(band)}>
                                 <Link to={`/bands/${band._id}`} >
                                 

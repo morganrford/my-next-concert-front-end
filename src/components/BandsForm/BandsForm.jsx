@@ -9,12 +9,11 @@ const BandsForm = (props) => {
   };
 
   const navigate = useNavigate();
-  // formData state to control the form.
+  
   const [formData, setFormData] = useState(
     props.selected ? props.selected : initialState
   );
 
-  // handleChange function to update formData state.
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
@@ -28,7 +27,7 @@ const BandsForm = (props) => {
     }
     navigate('/bands')
   };
-  // And finally, the form itself.
+
   return (
     <div>
         <h1>Bands Form</h1>
@@ -63,8 +62,7 @@ const BandsForm = (props) => {
           />
         </div>
         <button type="submit">
-          Add New Band
-          {/* {props.selected ? "Update Band" : "Add New Band"} */}
+          {props.selectedBand ? "Update Band" : "Add New Band"}
         </button>
       </form>
     </div>
