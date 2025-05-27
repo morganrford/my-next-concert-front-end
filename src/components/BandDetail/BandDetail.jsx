@@ -1,3 +1,5 @@
+
+
 const BandDetail = (props) => {
 
     if(!props.selectedBand) {

@@ -42,7 +42,7 @@ const App = () => {
       }
     };
     fetchConcerts();
-  }, [concerts]);
+  }, []);
 
   const handleSelectConcert = (concert) => {
     setSelectedConcert(concert);
@@ -120,7 +120,7 @@ const App = () => {
       }
     };
     fetchBands();
-  }, [bands]);
+  }, []);
 
   const handleSelectBand = (band) => {
     setSelectedBand(band);
