@@ -119,8 +119,7 @@ const ConcertForm = (props) => {
           />
         </div>
         <button type="submit">
-          Add New Concert
-        </button>
+{props.selectedConcert ? "Update Concert" : "Add New Concert"}        </button>
       </form>
     </div>
   );

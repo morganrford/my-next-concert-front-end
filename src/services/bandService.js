@@ -33,7 +33,7 @@ const update = async (formData, bandId) => {
       },
       body: JSON.stringify(formData),
     });
-    return res.json;
+    return res.json();
   } catch (error) {
     console.log(error);
   }
