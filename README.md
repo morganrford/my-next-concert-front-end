@@ -6,7 +6,8 @@ My Next Concert is a website for promoters to keep track of their concerts and t
 
 ## Getting Started
 
-[Link to deployed app](Link)
+[Link to deployed back-end app](https://my-next-concert-7f2056361a0b.herokuapp.com/)
+[Link to deployed front-end app](https://my-next-concert.netlify.app/)
 
 [Link to planning materials](https://trello.com/b/OFQoujzu/my-next-concert)
 
@@ -18,9 +19,25 @@ My Next Concert is a website for promoters to keep track of their concerts and t
 
 [Contrast Checker](https://webaim.org/resources/contrastchecker/)
 
+[CSS Buttons](https://www.w3schools.com/css/css3_buttons.asp)
+
+[Mobile Responsiveness](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design)
+
+[CSS Media Queries](https://css-tricks.com/a-complete-guide-to-css-media-queries/)
+
+[Responsive Web Design](https://web.dev/articles/responsive-web-design-basics)
+
+[CSS Values and Units](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units#relative_length_units)
+
+[Gap](https://css-tricks.com/almanac/properties/g/gap/)
+
+[Transform](https://developer.mozilla.org/en-US/docs/Web/CSS/transform)
+
+[Display](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
+
 ### Assets
 
-Canva was used to create our assets: [Canva](https://www.canva.com/)
+[Canva](https://www.canva.com/) was used to create our assets.
 
 ## Technologies Used
 
