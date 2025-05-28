@@ -46,10 +46,10 @@ const deleteBand = async (bandId) => {
       headers: {
         "Content-Type": "application/json",
       },
-      })
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 export { index, create, update, deleteBand };

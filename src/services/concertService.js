@@ -46,10 +46,10 @@ const deleteConcert = async (concertId) => {
       headers: {
         "Content-Type": "application/json",
       },
-      })
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 export { index, create, update, deleteConcert };
