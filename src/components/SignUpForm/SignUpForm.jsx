@@ -1,23 +1,22 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
-import { signUp } from '../../services/authService';
-import { UserContext } from '../../contexts/UserContext';
-
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router";
+import { signUp } from "../../services/authService";
+import { UserContext } from "../../contexts/UserContext";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
-   const { setUser } = useContext(UserContext);
-  const [message, setMessage] = useState('');
+  const { setUser } = useContext(UserContext);
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    passwordConf: '',
+    username: "",
+    password: "",
+    passwordConf: "",
   });
 
   const { username, password, passwordConf } = formData;
 
   const handleChange = (evt) => {
-    setMessage('');
+    setMessage("");
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
@@ -25,11 +24,9 @@ const SignUpForm = () => {
     evt.preventDefault();
     try {
       const newUser = await signUp(formData);
-      // Call the setUser function to update the user state, just like normal.
       setUser(newUser);
-      // Take the user to the (non-existent) home page after they sign up.
-      // We'll get to this shortly!
-      navigate('/');
+
+      navigate("/");
     } catch (err) {
       setMessage(err.message);
     }
@@ -44,43 +41,42 @@ const SignUpForm = () => {
       <h1>Sign Up</h1>
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
-        <div           className='text-box'>
-          <label htmlFor='username' >Username:</label>
+        <div className="text-box">
+          <label htmlFor="username">Username:</label>
           <input
-
-            type='text'
-            id='name'
+            type="text"
+            id="name"
             value={username}
-            name='username'
+            name="username"
             onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label htmlFor='password'>Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
-            type='password'
-            id='password'
+            type="password"
+            id="password"
             value={password}
-            name='password'
+            name="password"
             onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label htmlFor='confirm'>Confirm Password:</label>
+          <label htmlFor="confirm">Confirm Password:</label>
           <input
-            type='password'
-            id='confirm'
+            type="password"
+            id="confirm"
             value={passwordConf}
-            name='passwordConf'
+            name="passwordConf"
             onChange={handleChange}
             required
           />
         </div>
         <div>
           <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+          <button onClick={() => navigate("/")}>Cancel</button>
         </div>
       </form>
     </main>

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { useState, useContext } from 'react';
+import { useState, useContext } from "react";
 
 const UserContext = createContext();
 
@@ -15,11 +15,7 @@ function UserProvider({ children }) {
   const [user, setUser] = useState(getUserFromToken());
 
   const value = { user, setUser };
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 
 export { UserProvider, UserContext };

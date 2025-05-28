@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
+import { useParams } from "react-router";
 
 const BandsForm = (props) => {
   const initialState = {
@@ -8,10 +9,12 @@ const BandsForm = (props) => {
     members: "",
   };
 
+  const { bandId } = useParams();
+
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState(
-    props.selected ? props.selected : initialState
+    props.selectedBand ? props.selectedBand : initialState
   );
 
   const handleChange = (evt) => {
@@ -20,24 +23,28 @@ const BandsForm = (props) => {
 
   const handleSubmit = (evt, bandId) => {
     evt.preventDefault();
-    if (props.selected) {
+    if (props.selectedBand) {
       props.handleUpdateBand(formData, bandId);
     } else {
       props.handleAddBand(formData);
     }
-    navigate('/bands')
+    navigate("/bands");
   };
 
   return (
     <div>
-        <h1>Bands Form</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Bands Form</h1>
+      <form
+        onSubmit={(evt) => {
+          handleSubmit(evt, bandId);
+        }}
+      >
         <div className="form">
           <label htmlFor="name"> Band Name: </label>
           <input
             id="name"
             name="bandName"
-            value={formData.name}
+            value={formData.bandName}
             onChange={handleChange}
             required
           />

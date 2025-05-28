@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useParams } from "react-router";
 
 const ConcertForm = (props) => {
   const initialState = {
@@ -12,10 +13,11 @@ const ConcertForm = (props) => {
     bands: "",
   };
 
+  const { concertId } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState(
-    props.selected ? props.selected : initialState
+    props.selectedConcert ? props.selectedConcert : initialState
   );
 
   const handleChange = (evt) => {
@@ -25,10 +27,10 @@ const ConcertForm = (props) => {
   const handleSubmit = (evt, concertId) => {
     evt.preventDefault();
     const dataToSubmit = {
-    ...formData,
-    bands: formData.bands.split(",").map((b) => ({ bandName: b.trim() })),
-  };
-    if (props.selected) {
+      ...formData,
+      bands: formData.bands.split(",").map((b) => ({ bandName: b.trim() })),
+    };
+    if (props.selectedConcert) {
       props.handleUpdateConcert(dataToSubmit, concertId);
     } else {
       props.handleAddConcert(dataToSubmit);
@@ -39,13 +41,17 @@ const ConcertForm = (props) => {
   return (
     <div>
       <h1>Concert Form</h1>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(evt) => {
+          handleSubmit(evt, concertId);
+        }}
+      >
         <div className="form">
           <label htmlFor="venue-name">Venue Name:</label>
           <input
             id="venue-name"
             name="venueName"
-            value={formData.name}
+            value={formData.venueName}
             onChange={handleChange}
             required
           />
@@ -55,7 +61,7 @@ const ConcertForm = (props) => {
           <input
             id="venue-address"
             name="venueAddress"
-            value={formData.address}
+            value={formData.venueAddress}
             onChange={handleChange}
             required
           />
@@ -107,19 +113,20 @@ const ConcertForm = (props) => {
 
         <div className="form">
           <label htmlFor="bands">Bands (comma separated):</label>
+
           <input
             type="text"
             name="bands"
-            value={formData.bands}
+            value={formData.band}
             onChange={(e) =>
               setFormData({ ...formData, bands: e.target.value })
             }
-            placeholder="Nirvana, Foo Fighters, Soundgarden"
             required
           />
         </div>
         <button type="submit">
-{props.selectedConcert ? "Update Concert" : "Add New Concert"}        </button>
+          {props.selectedConcert ? "Update Concert" : "Add New Concert"}{" "}
+        </button>
       </form>
     </div>
   );

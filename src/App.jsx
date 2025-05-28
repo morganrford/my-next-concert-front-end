@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Routes, Route } from "react-router";
-import "./App.css";
 import "./index.css";
 import NavBar from "./components/NavBar/NavBar";
 import ConcertDetail from "./components/ConcertDetail/ConcertDetail";
@@ -14,8 +13,9 @@ import SignUpForm from "./components/SignUpForm/SignUpForm";
 import SignInForm from "./components/SignInForm/SignInForm";
 import BandsList from "./components/BandsList/BandsList";
 import BandDetail from "./components/BandDetail/BandDetail";
-import { useNavigate } from 'react-router'
-import Footer from './components/Footer/Footer';
+import { useNavigate } from "react-router";
+import Footer from "./components/Footer/Footer";
+import { UserContext } from "./contexts/UserContext";
 
 const App = () => {
   const [concerts, setConcerts] = useState([]);
@@ -26,26 +26,29 @@ const App = () => {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const navigate = useNavigate()
+  const { user, setUser } = useContext(UserContext);
 
-  //concerts
-  useEffect(() => {
-    const fetchConcerts = async () => {
-      try {
-        const fetchedConcerts = await concertService.index();
-        if (fetchedConcerts.err) {
-          throw new Error(fetchedConcerts.err);
-        }
-        setConcerts(fetchedConcerts);
-      } catch (err) {
-        console.log(err);
+  const navigate = useNavigate();
+
+  const fetchConcerts = async () => {
+    try {
+      const fetchedConcerts = await concertService.index();
+      if (fetchedConcerts.err) {
+        throw new Error(fetchedConcerts.err);
       }
-    };
-    fetchConcerts();
-  }, [concerts]);
+      setConcerts(fetchedConcerts);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  const handleSelectConcert = (concert) => {
+  useEffect(() => {
+    fetchConcerts();
+  }, []);
+
+  const handleSelectConcert = (concert, bands) => {
     setSelectedConcert(concert);
+    setSelectedBand(bands);
     setIsFormOpen(false);
   };
 
@@ -103,24 +106,25 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
-    navigate('/concerts')
+    fetchConcerts();
+    navigate("/concerts");
   };
 
-  //bands
-  useEffect(() => {
-    const fetchBands = async () => {
-      try {
-        const fetchedBands = await bandService.index();
-        if (fetchedBands.err) {
-          throw new Error(fetchedBands.err);
-        }
-        setBands(fetchedBands);
-      } catch (err) {
-        console.log(err);
+  const fetchBands = async () => {
+    try {
+      const fetchedBands = await bandService.index();
+      if (fetchedBands.err) {
+        throw new Error(fetchedBands.err);
       }
-    };
+      setBands(fetchedBands);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
     fetchBands();
-  }, [bands]);
+  }, []);
 
   const handleSelectBand = (band) => {
     setSelectedBand(band);
@@ -130,7 +134,6 @@ const App = () => {
   const handleBandFormView = (band) => {
     if (!band._id) setSelectedBand(null);
     setIsFormOpen(!isFormOpen);
-    
   };
 
   const handleAddBand = async (formData) => {
@@ -180,82 +183,113 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
-    navigate('/bands')
+    fetchBands();
+    navigate("/bands");
   };
 
   return (
-    <div className='app'>
-      <NavBar />
+    <div className="app">
+      <NavBar user={user} />
 
-      <div className='content'>
-      <h1>My Next Concert</h1>
-      <Routes>
-        <Route path="/sign-up" element={<SignUpForm />} />
-        <Route path="/sign-in" element={<SignInForm />} />
-        <Route path="/" element={<HomePage />} />
+      <div className="content">
+        <h1>My Next Concert</h1>
+        <Routes>
+          <Route path="/sign-up" element={<SignUpForm />} />
+          <Route path="/sign-in" element={<SignInForm />} />
+          <Route path="/" element={<HomePage user={user} />} />
 
-        <Route
-          path="/concerts"
-          element={
-            <ConcertList
-              concerts={concerts}
-              handleSelectConcert={handleSelectConcert}
-              handleConcertFormView={handleConcertFormView}
-              isFormOpen={isFormOpen}
-            />
-          }
-        />
+          <Route
+            path="/concerts"
+            element={
+              <ConcertList
+                concerts={concerts}
+                handleSelectConcert={handleSelectConcert}
+                handleConcertFormView={handleConcertFormView}
+                isFormOpen={isFormOpen}
+                user={user}
+              />
+            }
+          />
 
-        <Route
-          path="/concerts/new"
-          element={
-            <ConcertForm
-              handleAddConcert={handleAddConcert}
-              selectedConcert={selectedConcert}
-              handleUpdateConcert={handleUpdateConcert}
-            />
-          }
-        />
+          <Route
+            path="/concerts/new"
+            element={
+              <ConcertForm
+                handleAddConcert={handleAddConcert}
+                selectedConcert={selectedConcert}
+                handleUpdateConcert={handleUpdateConcert}
+                selectedBand={selectedBand}
+              />
+            }
+          />
 
-        <Route
-          path="/concerts/:concertId"
-          element = {isFormOpen ? <ConcertForm handleAddConcert={handleAddConcert} selectedConcert={selectedConcert} handleUpdateConcert={handleUpdateConcert}/> : <ConcertDetail selectedConcert={selectedConcert} handleConcertFormView={handleConcertFormView} handleDeleteConcert={handleDeleteConcert}/>}
-        />
+          <Route
+            path="/concerts/:concertId"
+            element={
+              isFormOpen ? (
+                <ConcertForm
+                  handleAddConcert={handleAddConcert}
+                  selectedConcert={selectedConcert}
+                  handleUpdateConcert={handleUpdateConcert}
+                />
+              ) : (
+                <ConcertDetail
+                  selectedConcert={selectedConcert}
+                  handleConcertFormView={handleConcertFormView}
+                  handleDeleteConcert={handleDeleteConcert}
+                />
+              )
+            }
+          />
 
-        <Route
-          path="/bands"
-          element={
-            <BandsList
-              bands={bands}
-              handleSelectBand={handleSelectBand}
-              handleBandFormView={handleBandFormView}
-              isFormOpen={isFormOpen}
-            />
-          }
-        />
-        <Route
-          path="/band/new"
-          element={
-            <BandsForm
-              handleAddBand={handleAddBand}
-              selectedBand={selectedBand}
-              handleUpdateBand={handleUpdateBand}
-            />
-          }
-        />
+          <Route
+            path="/bands"
+            element={
+              <BandsList
+                bands={bands}
+                handleSelectBand={handleSelectBand}
+                handleBandFormView={handleBandFormView}
+                isFormOpen={isFormOpen}
+                user={user}
+              />
+            }
+          />
+          <Route
+            path="/band/new"
+            element={
+              <BandsForm
+                handleAddBand={handleAddBand}
+                selectedBand={selectedBand}
+                handleUpdateBand={handleUpdateBand}
+              />
+            }
+          />
 
-        <Route
-          path="/bands/:bandId"
-          element = {isFormOpen ? <BandsForm handleAddBand={handleAddBand} selectedBand={selectedBand} handleUpdateBand={handleUpdateBand}/> : <BandDetail selectedBand={selectedBand} handleBandFormView={handleBandFormView} handleDeleteBand={handleDeleteBand}/>}
-        />
+          <Route
+            path="/bands/:bandId"
+            element={
+              isFormOpen ? (
+                <BandsForm
+                  handleAddBand={handleAddBand}
+                  selectedBand={selectedBand}
+                  handleUpdateBand={handleUpdateBand}
+                />
+              ) : (
+                <BandDetail
+                  selectedBand={selectedBand}
+                  handleBandFormView={handleBandFormView}
+                  handleDeleteBand={handleDeleteBand}
+                />
+              )
+            }
+          />
 
-        <Route path="*" element={<h2>Whoops, nothing to see here!</h2>} />
-      </Routes>
+          <Route path="*" element={<h2>Whoops, nothing to see here!</h2>} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
-          <Footer />
-    </div>
-
-  )
-}
+  );
+};
 
 export default App;
